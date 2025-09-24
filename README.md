@@ -42,14 +42,18 @@ _Use and share this table under the [CC BY-NC-4.0](LICENSE) license_
     - [ClientInstance](#clientinstance-1)
     - [ClientNetworkHandler](#clientnetworkhandler)
     - [EntityContextBase](#entitycontextbase)
+    - [FunctionManager](#functionmanager)
     - [GameMode](#gamemode-1)
     - [GuiData](#guidata-1)
     - [ItemUseInventoryTransaction](#itemuseinventorytransaction)
+    - [Level](#level-1)
     - [LocalPlayer](#localplayer-1)
     - [MobEffectInstance](#mobeffectinstance-1)
+    - [MobEvents](#mobevents)
     - [NetworkIdentifier](#networkidentifier)
     - [OwnerStorageEntity](#ownerstorageentity)
     - [Player](#player-1)
+    - [ServerLevel](#serverlevel)
     - [ServerNetworkHandler](#servernetworkhandler)
     - [ServerPlayer](#serverplayer)
     - [SurvivalMode](#survivalmode)
@@ -298,6 +302,10 @@ _此表未经完全验证_
 - **EntityContextBase::_enttRegistry** ()  
   `0x1D2DB18`
 
+### FunctionManager
+- void **FunctionManager::tick** ()  
+  `0x1DFCB30`
+
 ### GameMode
 - bool **GameMode::destroyBlock** (BlockPos const& pos, unsigned char face)  
   `0x20EB8C0`
@@ -322,6 +330,10 @@ _此表未经完全验证_
 - void **ItemUseInventoryTransaction::handle** (Player*, bool)  
   `0x20D329C`
 
+### Level
+- void **Level::tick** ()
+  `0x2E9DCE0`
+
 ### LocalPlayer
 - void **LocalPlayer::displayClientMessage** (std::string const& message)  
   `0x36FBEAC`
@@ -333,6 +345,10 @@ _此表未经完全验证_
 ### MobEffectInstance
 - bool **MobEffectInstance::operator!=** (MobEffectInstance const&)  
   `0x2164324`
+
+### MobEvents
+- void **MobEvents::tick** ()  
+  `0x2EAD348`
 
 ### NetworkIdentifier
 - bool **NetworkIdentifier::equalsTypeData** (NetworkIdentifier const&)  
@@ -351,6 +367,10 @@ _此表未经完全验证_
   `0x28266EC`
 - void **Player::setPlayerGameType** (GameType type)  
   `0x283A66C`
+
+### ServerLevel
+- void **ServerLevel::tick** ()
+  `0x1E11794`
 
 ### ServerNetworkHandler
 - void **ServerNetworkHandler::handle** (Level **this, const NetworkIdentifier* networkIdentifier, const InteractPacket* packet)  
