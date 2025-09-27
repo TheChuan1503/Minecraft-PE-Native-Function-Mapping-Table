@@ -10,6 +10,9 @@ _All addresses and offsets are analyzed by TheChuan1503_
 使用和分享此表必须遵守 [CC BY-NC-4.0](LICENSE.zh) 许可证  
 _Use and share this table under the [CC BY-NC-4.0](LICENSE) license_
 
+本项目用到了 [libminecraftpe.so-ida-analysis](https://github.com/1503Dev/libminecraftpe.so-ida-analysis/)  
+_This project uses [libminecraftpe.so-ida-analysis](https://github.com/1503Dev/libminecraftpe.so-ida-analysis/)_
+
 # Content
 - [Minecraft-PE-Native-Function-Mapping-Table](#minecraft-pe-native-function-mapping-table)
 - [Content](#content)
@@ -41,13 +44,17 @@ _Use and share this table under the [CC BY-NC-4.0](LICENSE) license_
     - [BlockPosTrackerComponent](#blockpostrackercomponent)
     - [ClientInstance](#clientinstance-1)
     - [ClientNetworkHandler](#clientnetworkhandler)
+    - [EffectCommand](#effectcommand)
     - [EntityContextBase](#entitycontextbase)
     - [FunctionManager](#functionmanager)
     - [GameMode](#gamemode-1)
     - [GuiData](#guidata-1)
+    - [InGamePlayScreen](#ingameplayscreen)
     - [ItemUseInventoryTransaction](#itemuseinventorytransaction)
     - [Level](#level-1)
+    - [LevelRendererPlayer](#levelrendererplayer-1)
     - [LocalPlayer](#localplayer-1)
+    - [Minecraft](#minecraft-1)
     - [MobEffectInstance](#mobeffectinstance-1)
     - [MobEvents](#mobevents)
     - [NetworkIdentifier](#networkidentifier)
@@ -189,7 +196,7 @@ _Use and share this table under the [CC BY-NC-4.0](LICENSE) license_
   `0x6643C84`
 
 ### MobEffectInstance
-- _void **MobEffectInstance::MobEffectInstance** (MobEffectInstance* this, unsigned int effectId, int durationTicks, int level, bool b1, bool effectVisible, bool b2)_  
+- _void **MobEffectInstance::MobEffectInstance** (MobEffectInstance\* this, unsigned int effectId, int durationTicks, int level, bool b1, bool effectVisible, bool b2)_  
   `0x63B73F0`
 
 ### Player
@@ -211,7 +218,7 @@ _Use and share this table under the [CC BY-NC-4.0](LICENSE) license_
   `0x5C4D128`
 
 ### PlayerSnapshot
-- _void **PlayerSnapshot::PlayerSnapshot** (PlayerSnapshot* this)_  
+- _void **PlayerSnapshot::PlayerSnapshot** (PlayerSnapshot\* this)_  
   `0x5650584`
 
 ### Timer
@@ -229,7 +236,7 @@ _Use and share this table under the [CC BY-NC-4.0](LICENSE) license_
 ## 1.16.210.05_arm64-v8a
 _此表未经完全验证_
 
-- jint **JNI_OnLoad** (JavaVM* vm, void* reserved)  
+- jint **JNI_OnLoad** (JavaVM\* vm, void\* reserved)  
   `0x1DA1A20`
 
 ### Abilities
@@ -287,6 +294,8 @@ _此表未经完全验证_
   `0x34B99D4`
 - void **ClientInstance::requestLeaveGame** (bool immediateExit, bool suppressConfirmation)  
   `0x34B99C4`
+- void **ClientInstance::setClientGameMode** (GameType type)  
+  `0x34C195C`
 - void **ClientInstance::startExternalNetworkWorld** (Social::GameConnectionInfo, std::string const&, bool)  
   `0x34AC780`
 - void **ClientInstance::update** (bool forceUpdate)  
@@ -297,6 +306,12 @@ _此表未经完全验证_
   `0x37E3A48`
 - void **ClientNetworkHandler::handle** (const NetworkIdentifier *, const TextPacket *)  
   `0x37DB9FC` ?
+- void **ClientNetworkHandler::handle** (const NetworkIdentifier *, const UpdatePlayerGameTypePacket *)  
+  `0x37DDA70`
+
+### EffectCommand
+- void **EffectCommand::execute** (const CommandOrigin \*, CommandOutput \*)  
+  `0x1FD00F4`
 
 ### EntityContextBase
 - **EntityContextBase::_enttRegistry** ()  
@@ -326,6 +341,14 @@ _此表未经完全验证_
 - void **GuiData::showTipMessage** (std::string const& message)  
   `0x3312AB0`
 
+### InGamePlayScreen
+- float? **InGamePlayScreen::_getPickRange** ()
+  `0x3395128`
+- void **InGamePlayScreen::_renderItemInHand** (ScreenContext *, Player *)  
+  `0x3396490`
+- void **InGamePlayScreen::applyInput** (float)  
+  `0x33918FC`
+
 ### ItemUseInventoryTransaction
 - void **ItemUseInventoryTransaction::handle** (Player*, bool)  
   `0x20D329C`
@@ -334,15 +357,43 @@ _此表未经完全验证_
 - void **Level::tick** ()
   `0x2E9DCE0`
 
+### LevelRendererPlayer
+- float **LevelRendererPlayer::getFov** (float baseFov, bool useSmoothTransition)  
+  `0x3FACD44`
+
 ### LocalPlayer
+- void **LocalPlayer::addLevels** (int levels)  
+  `0x3700B9C`
 - void **LocalPlayer::displayClientMessage** (std::string const& message)  
-  `0x36FBEAC`
+  `0x36FBEB0`
+- float? **LocalPlayer::getPickRange** ()  
+  `0x37010B4`
+- void **LocalPlayer::jumpFromGround** ()  
+  `0x37011F0`
+- void **LocalPlayer::setPlayerGameType** (GameType type)  
+  `0x36FE0E0`
+- void **LocalPlayer::setPlayerGameTypeWithoutServerNotification** (GameType type)  
+  `0x36FE198`
+- void **LocalPlayer::setPos** (const Vec3* pos)  
+  `0x36FACA4`
 - void **LocalPlayer::startRiding** (Actor *)  
   `0x37000EC`
 - void **LocalPlayer::stopSpinAttack** ()  
   `0x36FBE2C`
 
+### Minecraft
+- Timer **mTimer**  
+  `+0xB8`
+
+  ---
+- void **Minecraft::getTimer** ()  
+  `0x289421C`
+- void **Minecraft::setGameModeReal** (GameType type)  
+  `0x28929FC`
+
 ### MobEffectInstance
+- _**MobEffectInstance::MobEffectInstance** (MobEffectInstance* this, unsigned int effectId, int durationTicks, int level, bool b1, bool effectVisible, bool b2)_  
+  `0x21637D4`
 - bool **MobEffectInstance::operator!=** (MobEffectInstance const&)  
   `0x2164324`
 
@@ -361,10 +412,16 @@ _此表未经完全验证_
   `0x17B3C14`
 
 ### Player
+- void **Player::attack** (Actor *)  
+  `0x2834044`
+- float **Player::getCameraOffset** ()  
+  `0x2832D5C`
 - GameType **Player::getPlayerGameType** ()  
   `0x283AEAC`
 - int **Player::getClientSubId** ()  
   `0x28266EC`
+- float **Player::getSpeed** ()  
+  `0x2826BFC`
 - void **Player::setPlayerGameType** (GameType type)  
   `0x283A66C`
 
@@ -373,7 +430,7 @@ _此表未经完全验证_
   `0x1E11794`
 
 ### ServerNetworkHandler
-- void **ServerNetworkHandler::handle** (Level **this, const NetworkIdentifier* networkIdentifier, const InteractPacket* packet)  
+- void **ServerNetworkHandler::handle** (Level \*\*this, const NetworkIdentifier\* networkIdentifier, const InteractPacket\* packet)  
   `0x1921758`
 
 ### ServerPlayer
